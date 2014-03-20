@@ -1,0 +1,3 @@
+base:
+  'cpan*':
+    - cpan-server

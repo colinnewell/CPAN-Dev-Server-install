@@ -1,0 +1,4 @@
+#!/bin/sh
+CATALYST_CONFIG=/opt/cpan/cpan-inject.conf
+export CATALYST_CONFIG
+exec setuidgid cpan cpan_mini_inject_rest_server.pl 
