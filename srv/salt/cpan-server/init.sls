@@ -2,6 +2,9 @@ include:
   - nginx
   - daemontools
 
+cron:
+  pkg.installed
+
 build-essential:
   pkg.installed
 
