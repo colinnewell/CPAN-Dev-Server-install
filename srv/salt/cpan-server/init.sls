@@ -31,6 +31,17 @@ cpan:
     - home: /opt/cpan
     - shell: /bin/false
 
+/opt/cpan/minicpan/:
+  file.directory:
+    - user: cpan
+    - group: cpan
+    - dir_mode: 755
+    - file_mode: 644
+    - recurse:
+      - user
+      - group
+      - mode
+
 /opt/cpan/minicpan/repository:
   file.directory:
     - user: cpan
