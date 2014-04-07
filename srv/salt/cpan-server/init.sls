@@ -74,21 +74,11 @@ cpan:
     - require:
       - file: /opt/cpan/.minicpanrc
 
-/usr/local/bin/mcpani --inject:
+/usr/local/bin/mcpani --update:
   cron.present:
     - user: cpan
     - minute: 17
     - identifier: cpani
-    - require:
-      - pkg: cpanminus
-      - cmd: cpan-mini
-
-/usr/local/bin/minicpan > /dev/null:
-  cron.present:
-    - user: cpan
-    - minute: 7
-    - hour: 2
-    - identifier: CPAN
     - require:
       - pkg: cpanminus
       - cmd: cpan-mini
@@ -106,6 +96,16 @@ cpan:
     - mode: 700
     - template: jinja
     - source: salt://cpan-server/run
+    - require:
+      - file: /opt/cpan/minicpan/repository
+      - cmd: cpan-mini
+      - pkg: daemontools
+
+/etc/service/cpan-mini-inject-rest/log/run:
+  file.managed:
+    - mode: 700
+    - template: jinja
+    - source: salt://cpan-server/log
     - require:
       - file: /opt/cpan/minicpan/repository
       - cmd: cpan-mini
