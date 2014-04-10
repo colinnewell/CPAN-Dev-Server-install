@@ -42,12 +42,16 @@ cpan:
       - group
       - mode
 
-/opt/cpan/minicpan/repository:
+/opt/cpan/repository:
   file.directory:
     - user: cpan
     - group: cpan
     - mode: 755
     - makedirs: True
+
+/opt/cpan/minicpan/repository:
+  file.symlink:
+    - target: /opt/cpan/repository
 
 /opt/cpan/cpan-inject.conf:
   file.managed:
@@ -97,7 +101,7 @@ cpan:
     - template: jinja
     - source: salt://cpan-server/run
     - require:
-      - file: /opt/cpan/minicpan/repository
+      - file: /opt/cpan/repository
       - cmd: cpan-mini
       - pkg: daemontools
 
@@ -107,7 +111,7 @@ cpan:
     - template: jinja
     - source: salt://cpan-server/log
     - require:
-      - file: /opt/cpan/minicpan/repository
+      - file: /opt/cpan/repository
       - cmd: cpan-mini
       - pkg: daemontools
 
