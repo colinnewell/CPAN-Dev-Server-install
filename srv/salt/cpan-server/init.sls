@@ -95,6 +95,10 @@ cpan:
     - watch_in:
       - service: nginx
 
+/etc/service/cpan-mini-inject-rest/log/:
+  file.directory:
+    - makedirs: True
+
 /etc/service/cpan-mini-inject-rest/run:
   file.managed:
     - mode: 700
